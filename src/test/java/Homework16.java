@@ -16,7 +16,7 @@ public class Homework16 extends BaseTest{
         Options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://qa.koel.app/";
         driver.get(url);
