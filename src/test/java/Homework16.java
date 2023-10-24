@@ -9,23 +9,24 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class Homework16 extends BaseTest{
+
     @Test
     public void registrationNavigation(){
         //Added chrome argument below to fix the web socket error
         ChromeOptions Options = new ChromeOptions();
         Options.addArguments("--remote-allow-origins=*");
 
-        WebDriver driver = new ChromeDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebDriver driver = new ChromeDriver(Options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://qa.koel.app/";
         driver.get(url);
 
-        WebElement registrationLink = driver.findElement(By.cssSelector("[herf='registration']"));
+        WebElement registrationLink = driver.findElement(By.cssSelector("[href='registration']"));
         registrationLink.click();
 
         String registrationUrl = "https://qa.koel.app/registration";
-        Assert.assertEquals(driver.getCurrentUrl(),registrationUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
 
         driver.quit();
 
