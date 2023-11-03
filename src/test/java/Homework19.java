@@ -12,6 +12,7 @@ public class Homework19 extends BaseTest{
     provideEmail("akansha.shukla@testpro.io");
     providePassword("te$t$tudent");
     clickSubmit();
+    Thread.sleep(2000);
     openPlaylist();
     clickDeletePlaylistBtn();
     Assert.assertEquals(getDeletedPlaylistMsg(),expectedPlaylistDeletedMessage);
