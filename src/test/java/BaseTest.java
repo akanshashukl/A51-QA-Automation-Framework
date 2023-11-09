@@ -15,10 +15,13 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver = null;
-    public String url = "https://qa.koel.app/";
-    public WebDriverWait wait;
-    Actions actions;
+    public static WebDriver driver = null;
+    public static String url = null;
+
+    public static WebDriverWait wait = null;
+
+    public static Actions actions = null;
+    
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();

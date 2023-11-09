@@ -5,10 +5,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework21 extends BaseTest {
+public class Homework22 extends BaseTest{
     String newPlaylistName = "Aaryav";
 
-     @Test
+    @Test
     public void renamePlaylist()throws InterruptedException{
         String updatedPlaylistMsg = "Updated playlist \"Aaryav.\"";
 
@@ -38,3 +38,4 @@ public class Homework21 extends BaseTest {
     }
 
 }
+
