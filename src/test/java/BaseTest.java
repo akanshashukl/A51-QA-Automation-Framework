@@ -48,8 +48,14 @@ public Object[][] getDataFromDataProvider(){
         return arrObj;
     }
 
-    public WebDriver driver = null;
-    public String url = "https://qa.koel.app/";
+    // DataProviders End here
+
+    //References start here
+
+
+    public WebDriver driver;
+    public String url = "https://qa.koel.app";
+
     public WebDriverWait wait;
     Actions actions;
     @BeforeSuite
@@ -67,19 +73,20 @@ public Object[][] getDataFromDataProvider(){
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         actions = new Actions(driver);
         driver.manage().window().maximize();
-
-        url = BaseURL;
-        navigateToLoginPage();
-
+        navigateToLoginPage(BaseURL);
     }
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
 
+
     public void navigateToLoginPage(){
-        String url = "https://qa.koel.app/";
         driver.get(url);
+    }
+
+    public void navigateToLoginPage(String BaseURL){
+        driver.get(BaseURL);
     }
 
     public void provideEmail(String email){

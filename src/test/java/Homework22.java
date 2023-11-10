@@ -1,3 +1,5 @@
+import PageObjectModel.HomePage;
+import PageObjectModel.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -6,36 +8,22 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework22 extends BaseTest{
-    String newPlaylistName = "Aaryav";
 
     @Test
-    public void renamePlaylist()throws InterruptedException{
+    public void renamePlaylist() {
+        String newPlaylistName = "Aaryav";
         String updatedPlaylistMsg = "Updated playlist \"Aaryav.\"";
 
-        provideEmail("akansha.shukla@testpro.io");
-        providePassword("te$t$tudent");
-        clickSubmit();
-        Thread.sleep(2000);
-        doubleClickPlaylist();
-        enterNewPlaylistName();
-        Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+        homePage.doubleClickPlayList();
+        homePage.enterNewPlaylistName(newPlaylistName);
+        Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
 
     }
-    public void doubleClickPlaylist(){
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
-        actions.doubleClick(playlistElement).perform();
-    }
-    public void enterNewPlaylistName() {
-        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
 
-        playlistInputField.sendKeys(newPlaylistName);
-        playlistInputField.sendKeys(Keys.ENTER);
-    }
-    public String getRenamePlaylistSuccessMsg(){
-        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return  notification.getText();
     }
 
-}
 

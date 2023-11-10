@@ -9,13 +9,13 @@ public class Homework21 extends BaseTest {
     String newPlaylistName = "Aaryav";
 
      @Test
-    public void renamePlaylist()throws InterruptedException{
+    public void renamePlaylist(){
         String updatedPlaylistMsg = "Updated playlist \"Aaryav.\"";
 
         provideEmail("akansha.shukla@testpro.io");
         providePassword("te$t$tudent");
         clickSubmit();
-        Thread.sleep(2000);
+
         doubleClickPlaylist();
         enterNewPlaylistName();
         Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
