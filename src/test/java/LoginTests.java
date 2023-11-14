@@ -1,3 +1,5 @@
+import PageObjectModel.HomePage;
+import PageObjectModel.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -27,7 +29,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
+    public void loginValidEmailPassword() {
 
         //steps
 
@@ -44,7 +46,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginInValidEmailValidPassword() throws InterruptedException {
+    public void loginInValidEmailValidPassword()  {
         //steps
         navigateToLoginPage();
         provideEmail("InvalidEmail@testpro.io");
@@ -82,4 +84,22 @@ public class LoginTests extends BaseTest {
         clickSubmit();
         Reporter.log("Search results are displayed.");
     }
+    /**
+     * With Fluent Interface and Selenium Page Factory
+     * @throws InterruptedException
+     */
+    @Test
+    public void LoginValidEmailPasswordTestByPageFactory() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmailToLogin("akansha.shukla@testpro.io")
+                .providePasswordToLogin("te$t$tudent")
+                .clickSubmitBtnToLogin();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+    public void waitForAnElementToBeVisible(String cssLocator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("")));
+    }
+
 }
