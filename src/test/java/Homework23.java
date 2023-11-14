@@ -5,14 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework23 extends BasePage {
-
-    public Homework23(WebDriver givenDriver) {
-        super(givenDriver);
-    }
+public class Homework23 extends BaseTest {
     @Test
 
-    public void renamePlaylist()throws InterruptedException{
+    public void renamePlaylist() {
         String newPlaylistName = "Aaryav";
         String updatedPlaylistMsg = "Updated playlist \"Aaryav.\"";
 
