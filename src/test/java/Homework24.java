@@ -12,7 +12,7 @@ public class Homework24 extends BaseTest{
 
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        
+
         loginPage.provideEmailToLogin("akansha.shukla@testpro.io");
         loginPage.providePasswordToLogin("te$t$tudent");
         loginPage.clickSubmitBtnToLogin();

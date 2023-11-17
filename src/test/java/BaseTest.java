@@ -77,19 +77,17 @@ public Object[][] getDataFromDataProvider(){
 
 @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
+   // public void launchBrowser(String BaseURL) throws MalformedURLException {
        // ChromeOptions options = new ChromeOptions();
        // options.addArguments("--remote-allow-origins=*");
         //driver = new ChromeDriver(options);
+public void launchBrowser(String BaseURL) throws MalformedURLException {
+    driver = pickBrowser(System.getProperty("browser"));
+    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    actions = new Actions(driver);
+    driver.manage().window().maximize();
+    navigateToLoginPage(BaseURL);
 
-        driver = pickBrowser(System.getProperty("browser"));
-
-        driver = new FirefoxDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        driver.manage().window().maximize();
-        navigateToLoginPage(BaseURL);
     }
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -113,6 +111,7 @@ public Object[][] getDataFromDataProvider(){
             case "grid-firefox": // gradle clean test -Dbrowser=grid-firefox
                 caps.setCapability("browser", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+
 
             case "grid-chrome": // gradle clean test -Dbrowser=grid-chrome
                 caps.setCapability("browser", "chrome");
