@@ -5,9 +5,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework21 extends BaseTest{
+public class Homework21 extends BaseTest {
     String newPlaylistName = "Aaryav";
     @Test
+
     public void renamePlaylist(){
         String updatedPlaylistMsg = "Updated playlist \"Aaryav.\"";
 
