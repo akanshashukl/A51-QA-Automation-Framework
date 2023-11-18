@@ -105,16 +105,16 @@ public void launchBrowser(String BaseURL) throws MalformedURLException {
                 return driver = new EdgeDriver(edgeOptions);
             //Selenium Grid
             case "grid-edge": // gradle clean test -Dbrowser=grid-edge
-                caps.setCapability("browser", "MicrosoftEdge");
+                caps.setCapability("browserName", "MicrosoftEdge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
             case "grid-firefox": // gradle clean test -Dbrowser=grid-firefox
-                caps.setCapability("browser", "firefox");
+                caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
 
             case "grid-chrome": // gradle clean test -Dbrowser=grid-chrome
-                caps.setCapability("browser", "chrome");
+                caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
             default:
