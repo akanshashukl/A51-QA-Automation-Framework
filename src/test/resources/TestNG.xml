@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
+
+    <suite name="TestNG" parallel="methods" thread-count="2">
     <parameter name="BaseURL" value="https://qa.koel.app/"/>
     <test name="Example Test" preserve-order="false">
         <classes>
@@ -16,9 +17,10 @@
             <!--<class name="Homework21"/>-->
             <!--<class name="Homework22"/>-->
             <!--<class name="Homework23"/>-->
-              <class name="Homework24"/>
+            <!--<class name="Homework24"/>-->
+          <class name="Homework25"/>
 
 
-          </classes>
-      </test>
-  </suite>
+        </classes>
+    </test>
+</suite>

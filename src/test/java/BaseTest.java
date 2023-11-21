@@ -20,6 +20,7 @@ import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -63,16 +64,26 @@ public Object[][] getDataFromDataProvider(){
     //References start here
 
 
-    public static WebDriver driver;
+    public static WebDriver driver = null;
     public String url = "https://qa.koel.app";
 
-    public WebDriverWait wait;
-    Actions actions;
+    public WebDriverWait wait = null;
+    public static Actions actions = null;
+    private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
     @BeforeSuite
     static void setupClass() {
        // WebDriverManager.chromedriver().setup();
          //WebDriverManager.firefoxdriver().setup();
 
+    }
+    public void setupBrowser(String BaseURL) throws MalformedURLException {
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToLoginPage(BaseURL);
+    }
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
     }
 
 @BeforeMethod
@@ -117,6 +128,9 @@ public void launchBrowser(String BaseURL) throws MalformedURLException {
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
 
+                case "cloud":
+                return lambdaTest();
+
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
@@ -127,11 +141,32 @@ public void launchBrowser(String BaseURL) throws MalformedURLException {
         }
 
     }
+    public static WebDriver lambdaTest() throws MalformedURLException {
+        String username = "akansha.shukla";
+        String authKey = "roMXHrpovMm6c7MLjmPURZva19HMQvbV0VvL29427AyNr6LN1D";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("platform", "Windows 11");
+        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("version", "119.0");
+        caps.setCapability("resolution", "1024x768");
+        caps.setCapability("build", "TestNG with Java");
+        caps.setCapability("name", BaseTest.class.getName());
+        caps.setCapability("plugin", "java-testNG");
+
+
+        return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey + hub), caps);
+    }
 
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
         }
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
+    }
 
 
         public void navigateToLoginPage () {
